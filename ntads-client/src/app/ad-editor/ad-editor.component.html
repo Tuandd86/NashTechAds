@@ -1,0 +1,28 @@
+<h2 class="bd-title mt-5 mb-4">Create Ad</h2>
+<form  #adForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="form-group">
+    <label for="title">Ad title</label>
+    <input type="text" class="form-control" [(ngModel)]="ad.title" name="title" id="title" required>
+  </div>
+  <div class="form-group">
+    <label for="categoryId">Category</label>
+    <select class="form-control"  [(ngModel)]="ad.categoryId" id="categoryId" name="categoryId">
+        <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="price">Price</label>
+    <input id="price" name="price" [(ngModel)]="ad.price" placeholder="Ad price" type="number" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea id="description" name="description" [(ngModel)]="ad.description" class="form-control"></textarea>
+  </div>
+  <div class="form-group">
+      <input type="file" #file name="image" class="form-control-file" accept="image/png, image/jpeg" (change)="onFileSelect(file.files)" required />
+  </div>
+  <div class="form-group">
+      <button type="submit" [disabled]="!adForm.valid" class="btn btn-primary">Submit</button>
+      <a class="btn btn-secondary ml-2" role="button" [routerLink]="['/ads']">Cancel</a>
+  </div>
+</form>
